@@ -1,15 +1,38 @@
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu } from "lucide-react";
+import { Moon, Sun, Menu, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out."
+      });
+      navigate("/");
+    }
+  };
 
   if (!mounted) {
     return null;
@@ -62,12 +85,38 @@ const Header = () => {
             )}
           </Button>
           
-          <Button variant="ghost" className="hidden sm:inline-flex">
-            Sign In
-          </Button>
-          <Button variant="default" className="bg-gradient-primary border-0 hover:shadow-glow transition-all duration-300">
-            Get Started
-          </Button>
+          {user ? (
+            <>
+              <span className="hidden sm:inline-flex text-sm text-muted-foreground">
+                Welcome back!
+              </span>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={handleSignOut}
+                className="hover:bg-destructive/10"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button 
+                variant="ghost" 
+                className="hidden sm:inline-flex"
+                onClick={() => navigate("/auth")}
+              >
+                Sign In
+              </Button>
+              <Button 
+                variant="default" 
+                className="bg-gradient-primary border-0 hover:shadow-glow transition-all duration-300"
+                onClick={() => navigate("/auth")}
+              >
+                Get Started
+              </Button>
+            </>
+          )}
           
           {/* Mobile menu button */}
           <Button variant="ghost" size="icon" className="md:hidden">
