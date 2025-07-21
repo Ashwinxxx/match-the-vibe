@@ -57,7 +57,16 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-6 text-lg"
+              className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-6 text-lg transition-all duration-300 transform hover:scale-105"
+              onClick={() => {
+                const toolsSection = document.getElementById('tools-section');
+                if (toolsSection) {
+                  toolsSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              }}
             >
               Explore Our Tools
               <ArrowRight className="ml-2 h-5 w-5" />
