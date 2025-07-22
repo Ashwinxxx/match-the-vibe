@@ -62,6 +62,72 @@ const Index = () => {
         </div>
       </motion.section>
       
+      {/* Features Section */}
+      <motion.section
+        id="features"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Powerful{" "}
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
+              Features
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to master your voice and music, powered by advanced AI
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <motion.div
+            className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"
+            whileHover={{ y: -5, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Target className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Real-time Analysis</h3>
+            <p className="text-muted-foreground">
+              Get instant feedback on your pitch, timing, and vocal quality with our AI-powered analysis engine.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"
+            whileHover={{ y: -5, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Mic className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Voice Training</h3>
+            <p className="text-muted-foreground">
+              Personalized vocal exercises and training programs that adapt to your skill level and goals.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"
+            whileHover={{ y: -5, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Zap className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Smart Modulation</h3>
+            <p className="text-muted-foreground">
+              Transform your voice with intelligent effects and modulation that understands musical context.
+            </p>
+          </motion.div>
+        </div>
+      </motion.section>
+
       <ToolsTabs />
     </div>
   );

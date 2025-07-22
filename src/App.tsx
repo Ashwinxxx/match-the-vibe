@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import VoiceToolsPage from "./pages/VoiceToolsPage";
 import PitchMatchPage from "./pages/tools/PitchMatchPage";
@@ -27,6 +28,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
             <Route path="/voice-tools" element={<VoiceToolsPage />} />
             <Route path="/tool/pitch-match" element={<PitchMatchPage />} />
             <Route path="/tool/voice-modulation" element={<VoiceModulationPage />} />
