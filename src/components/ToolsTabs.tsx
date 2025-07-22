@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Target, Volume2, Wrench, Mic2, BarChart3, Play, Zap } from "lucide-react";
+import { useToolStore } from "@/hooks/useToolStore";
+import { useToast } from "@/hooks/use-toast";
 
 const tools = [
   {
@@ -13,7 +16,8 @@ const tools = [
     icon: Target,
     description: "Perfect your vocal pitch with AI-powered analysis",
     features: ["Real-time pitch correction", "Vocal range analysis", "Harmony suggestions"],
-    demo: "Match your voice to any song instantly"
+    demo: "Match your voice to any song instantly",
+    route: "/tool/pitch-match"
   },
   {
     id: "voice-modulation",
@@ -21,7 +25,8 @@ const tools = [
     icon: Volume2,
     description: "Transform your voice with professional effects",
     features: ["Voice character presets", "Custom modulation", "Real-time processing"],
-    demo: "Transform your voice into different styles"
+    demo: "Transform your voice into different styles",
+    route: "/tool/voice-modulation"
   },
   {
     id: "instrument-tuner",
@@ -29,7 +34,8 @@ const tools = [
     icon: Wrench,
     description: "Precision tuning for all instruments", 
     features: ["Auto-detection", "Custom temperaments", "Visual feedback"],
-    demo: "Tune any instrument with precision"
+    demo: "Tune any instrument with precision",
+    route: "/tool/instrument-tuner"
   },
   {
     id: "ai-karaoke",
@@ -37,7 +43,8 @@ const tools = [
     icon: Mic2,
     description: "Sing along with AI-generated backing tracks",
     features: ["Vocal isolation", "Key adjustment", "Lyric timing"],
-    demo: "Create karaoke from any song"
+    demo: "Create karaoke from any song",
+    route: "/tool/ai-karaoke"
   },
   {
     id: "voice-analyzer",
@@ -45,7 +52,8 @@ const tools = [
     icon: BarChart3,
     description: "Deep analysis of vocal performance",
     features: ["Vocal health insights", "Performance metrics", "Improvement tips"],
-    demo: "Analyze and improve your voice"
+    demo: "Analyze and improve your voice",
+    route: "/tool/voice-analyzer"
   }
 ];
 
@@ -53,6 +61,32 @@ const ToolsTabs = () => {
   const [activeTab, setActiveTab] = useState("pitch-match");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const { micPermissionGranted, requestMicPermission } = useToolStore();
+
+  const handleTryTool = async (tool: typeof tools[0]) => {
+    // Request microphone permission if not already granted
+    if (!micPermissionGranted) {
+      const granted = await requestMicPermission();
+      if (!granted) {
+        toast({
+          title: "Microphone access required",
+          description: "Please enable microphone access to use the voice tools",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
+    // Navigate to the tool page
+    navigate(tool.route);
+    
+    toast({
+      title: `Loading ${tool.name}`,
+      description: "Preparing your voice analysis tool...",
+    });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -171,6 +205,7 @@ const ToolsTabs = () => {
                           <Button 
                             size="lg" 
                             className="bg-gradient-primary border-0 hover:shadow-glow transition-all duration-300 transform hover:scale-105"
+                            onClick={() => handleTryTool(tool)}
                           >
                             <Zap className="mr-2 h-5 w-5" />
                             Try It Now

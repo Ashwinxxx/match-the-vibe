@@ -46,27 +46,45 @@ const Header = () => {
           <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">M</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            MusicVibe
+          <span 
+            className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
+            onClick={() => navigate('/')}
+          >
+            VibeNote
           </span>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Products
+          <button 
+            onClick={() => {
+              const toolsSection = document.getElementById('tools-section');
+              if (toolsSection) {
+                toolsSection.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            }}
+            className="text-muted-foreground hover:text-foreground transition-colors relative group"
+          >
+            Explore Tools
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </button>
+          <button 
+            onClick={() => navigate('/voice-tools')}
+            className="text-muted-foreground hover:text-foreground transition-colors relative group"
+          >
+            Voice Training
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </button>
+          <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors relative group">
+            Features
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            For Musicians
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            For Developers
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Technology
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Company
+          <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors relative group">
+            About
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
           </a>
         </nav>
 

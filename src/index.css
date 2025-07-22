@@ -44,6 +44,11 @@ All colors MUST be HSL.
     --gradient-hero: linear-gradient(135deg, hsl(240 15% 9%) 0%, hsl(270 30% 25%) 50%, hsl(300 40% 35%) 100%);
     --shadow-glow: 0 0 40px hsl(270 95% 65% / 0.3);
     --shadow-card: 0 10px 30px -10px hsl(240 15% 9% / 0.1);
+    --shadow-card-hover: 0 20px 40px -15px hsl(240 15% 9% / 0.15);
+    
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -87,6 +92,7 @@ All colors MUST be HSL.
     /* Dark theme gradients */
     --gradient-hero: linear-gradient(135deg, hsl(240 15% 9%) 0%, hsl(270 30% 15%) 50%, hsl(300 40% 20%) 100%);
     --shadow-glow: 0 0 40px hsl(270 95% 65% / 0.5);
+    --shadow-card-hover: 0 20px 40px -15px hsl(240 10% 12% / 0.3);
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
