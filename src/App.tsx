@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import VoiceToolsPage from "./pages/VoiceToolsPage";
 import PitchMatchPage from "./pages/tools/PitchMatchPage";
 import VoiceModulationPage from "./pages/tools/VoiceModulationPage";
+import ComingSoon from "./components/coming_soon";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,10 @@ const App = () => (
             <Route path="/voice-tools" element={<VoiceToolsPage />} />
             <Route path="/tool/pitch-match" element={<PitchMatchPage />} />
             <Route path="/tool/voice-modulation" element={<VoiceModulationPage />} />
+            {/* Unimplemented tools - route to coming soon */}
+            <Route path="/tool/instrument-tuner" element={<ComingSoon />} />
+            <Route path="/tool/ai-karaoke" element={<ComingSoon />} />
+            <Route path="/tool/voice-analyzer" element={<ComingSoon />} />
             <Route path="/auth" element={<Auth />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
